@@ -5,12 +5,11 @@ import br.com.projetob2w.springbootcommysql.model.Trilha;
 public class TrilhaRs {
 
     private Long id;
-    private String trilha_nome;
+    private String trilhaNome;
     private String diretoria;
 
     public static TrilhaRs converter(Trilha t) {
-        var trilha = new TrilhaRs();
-        trilha.setId(t.getId());
+        TrilhaRs trilha = new TrilhaRs();
         trilha.setTrilhaNome(t.getTrilhaNome());
         trilha.setDiretoria(t.getDiretoria());
         return trilha;
@@ -25,11 +24,11 @@ public class TrilhaRs {
     }
 
     public String getTrilhaNome() {
-        return trilha_nome;
+        return trilhaNome;
     }
 
-    public void setTrilhaNome(String trilha_nome) {
-        this.trilha_nome = trilha_nome;
+    public void setTrilhaNome(String trilhaNome) {
+        this.trilhaNome = trilhaNome;
     }
 
     public String getDiretoria() {

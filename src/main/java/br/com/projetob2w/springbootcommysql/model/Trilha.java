@@ -14,19 +14,27 @@ public class Trilha {
     private Long id;
 
     @Column(name="trilha_nome")
-    private String trilha_nome;
+    private String trilhaNome;
 
     @Column(name="diretoria")
     private String diretoria;
 
     @Column(name="missao_formal")
-    private String missao_formal;
+    private String missaoFormal;
 
     @Column(name="missao_alternativa")
-    private String missao_alternativa;
+    private String missaoAlternativa;
 
     @Column(name="data_atualizacao")
-    private Timestamp data_atualizacao;
+    private Timestamp dataAtualizacao;
+
+    public Trilha() {
+    }
+
+    public Trilha(String trilhaNome, String diretoria) {
+        this.trilhaNome = trilhaNome;
+        this.diretoria = diretoria;
+    }
 
     public Long getId() {
         return id;
@@ -37,11 +45,11 @@ public class Trilha {
     }
 
     public String getTrilhaNome() {
-        return trilha_nome;
+        return trilhaNome;
     }
 
-    public void setTrilhaNome(String trilha_nome) {
-        this.trilha_nome = trilha_nome;
+    public void setTrilhaNome(String trilhaNome) {
+        this.trilhaNome = trilhaNome;
     }
 
     public String getDiretoria() {
@@ -53,26 +61,26 @@ public class Trilha {
     }
 
     public String getMissaoFormal() {
-        return missao_formal;
+        return missaoFormal;
     }
 
-    public void setMissaoFormal(String missao_formal) {
-        this.missao_formal = missao_formal;
+    public void setMissaoFormal(String missaoFormal) {
+        this.missaoFormal = missaoFormal;
     }
 
     public String getMissaoAlternativa() {
-        return missao_alternativa;
+        return missaoAlternativa;
     }
 
-    public void setMissaoAlternativa(String missao_alternativa) {
-        this.missao_alternativa = missao_alternativa;
+    public void setMissaoAlternativa(String missaoAlternativa) {
+        this.missaoAlternativa = missaoAlternativa;
     }
 
     public Timestamp getDataAtualizacao() {
-        return data_atualizacao;
+        return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(Timestamp data_atualizacao) {
-        this.data_atualizacao = data_atualizacao;
+    public void setDataAtualizacao(Timestamp dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
 }

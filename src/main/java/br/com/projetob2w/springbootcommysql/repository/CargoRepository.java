@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo, Long> {
-    List<Cargo> findByNomeContains(String name);
+    List<Cargo> findByCargoNomeContains(String name);
 }

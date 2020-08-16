@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cargo")
+@Table(name ="cargo")
 public class Cargo {
 
     @Id
@@ -14,16 +14,25 @@ public class Cargo {
     private Long id;
 
     @Column(name="cargo_nome")
-    private String cargo_nome;
+    private String cargoNome;
 
-    @Column(name="trilha_id")
-    private Trilha trilha_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "trilha_id", referencedColumnName = "id")
+    private Trilha trilhaId;
 
     @Column(name="cargo_missao")
-    private String cargo_missao;
+    private String cargoMissao;
 
     @Column(name="data_atualizacao")
-    private Timestamp data_atualizacao;
+    private Timestamp dataAtualizacao;
+
+    public Cargo(){
+    }
+
+    public Cargo(String cargoNome, Trilha trilhaId) {
+        this.cargoNome = cargoNome;
+        this.trilhaId = trilhaId;
+    }
 
     public Long getId() {
         return id;
@@ -34,34 +43,34 @@ public class Cargo {
     }
 
     public String getCargoNome() {
-        return cargo_nome;
+        return cargoNome;
     }
 
-    public void setCargoNome(String cargo_nome) {
-        this.cargo_nome = cargo_nome;
+    public void setCargoNome(String cargoNome) {
+        this.cargoNome = cargoNome;
     }
 
     public Trilha getTrilhaId() {
-        return trilha_id;
+        return trilhaId;
     }
 
-    public void setTrilhaId(Trilha trilha_id) {
-        this.trilha_id = trilha_id;
+    public void setTrilhaId(Trilha trilhaId) {
+        this.trilhaId = trilhaId;
     }
 
     public String getCargoMissao() {
-        return cargo_missao;
+        return cargoMissao;
     }
 
-    public void setCargoMissao(String cargo_missao) {
-        this.cargo_missao = cargo_missao;
+    public void setCargoMissao(String cargoMissao) {
+        this.cargoMissao = cargoMissao;
     }
 
-    public Timestamp getDataAtualizacao() {
-        return data_atualizacao;
+   public Timestamp getDataAtualizacao() {
+        return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(Timestamp data_atualizacao) {
-        this.data_atualizacao = data_atualizacao;
+    public void setDataAtualizacao(Timestamp dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
 }

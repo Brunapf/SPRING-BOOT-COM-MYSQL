@@ -35,20 +35,20 @@ public class CargoController {
 
     @GetMapping("/{id}")
     public CargoRs findById(@PathVariable("id") Long id) {
-        var cargo = cargoRepository.getOne(id);
+        Cargo cargo = cargoRepository.getOne(id);
         return CargoRs.converter(cargo);
     }
 
     @PostMapping("/")
-    public void savePerson(@RequestBody CargoRq cargo) {
-        var c = new Cargo();
+    public void saveCargo(@RequestBody CargoRq cargo) {
+        Cargo c = new Cargo(cargo.getCargoNome(),cargo.getTrilhaId());
         c.setCargoNome(cargo.getCargoNome());
         c.setTrilhaId(cargo.getTrilhaId());
         cargoRepository.save(c);
     }
 
     @PutMapping("/{id}")
-    public void updatePerson(@PathVariable("id") Long id, @RequestBody CargoRq cargo) throws Exception {
+    public void updateCargo(@PathVariable("id") Long id, @RequestBody CargoRq cargo) throws Exception {
         var c = cargoRepository.findById(id);
 
         if (c.isPresent()) {
@@ -57,13 +57,13 @@ public class CargoController {
             cargoSave.setTrilhaId(cargo.getTrilhaId());
             cargoRepository.save(cargoSave);
         } else {
-            throw new Exception("Cargo Não encontrada");
+            throw new Exception("Cargo não encontrado");
         }
     }
 
     @GetMapping("/filter")
-    public List<CargoRs> findPersonByName(@RequestParam("nome") String nome) {
-        return this.cargoRepository.findByNomeContains(nome)
+    public List<CargoRs> findPersonByName(@RequestParam("name") String name) {
+        return this.cargoRepository.findByCargoNomeContains(name)
                 .stream()
                 .map(CargoRs::converter)
                 .collect(Collectors.toList());
@@ -72,10 +72,10 @@ public class CargoController {
     @GetMapping("/filter/custom")
     public List<CargoRs> findPersonByCustom(
             @RequestParam(value = "id", required = false) Long id,
-            @RequestParam(value = "cargo_nome", required = false) String cargo_nome,
-            @RequestParam(value = "trilha_id", required = false) Trilha trilha_id
+            @RequestParam(value = "cargoNome", required = false) String cargoNome,
+            @RequestParam(value = "trilhaId", required = false) Trilha trilhaId
     ) {
-        return this.cargoCustomRepository.find(id, cargo_nome, trilha_id)
+        return this.cargoCustomRepository.find(id, cargoNome, trilhaId)
                 .stream()
                 .map(CargoRs::converter)
                 .collect(Collectors.toList());

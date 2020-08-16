@@ -34,35 +34,35 @@ public class TrilhaController {
 
     @GetMapping("/{id}")
     public TrilhaRs findById(@PathVariable("id") Long id) {
-        var trilha = trilhaRepository.getOne(id);
+        Trilha trilha = trilhaRepository.getOne(id);
         return TrilhaRs.converter(trilha);
     }
 
     @PostMapping("/")
-    public void savePerson(@RequestBody TrilhaRq trilha) {
-        var p = new Trilha();
-        p.setTrilhaNome(trilha.getTrilhaNome());
-        p.setDiretoria(trilha.getDiretoria());
-        trilhaRepository.save(p);
+    public void saveTrilha(@RequestBody TrilhaRq trilha) {
+        Trilha t = new Trilha(trilha.getTrilhaNome(),trilha.getDiretoria());
+        t.setTrilhaNome(trilha.getTrilhaNome());
+        t.setDiretoria(trilha.getDiretoria());
+        trilhaRepository.save(t);
     }
 
     @PutMapping("/{id}")
-    public void updatePerson(@PathVariable("id") Long id, @RequestBody TrilhaRq trilha) throws Exception {
-        var p = trilhaRepository.findById(id);
+    public void updateTrilha(@PathVariable("id") Long id, @RequestBody TrilhaRq trilha) throws Exception {
+        var t = trilhaRepository.findById(id);
 
-        if (p.isPresent()) {
-            var trilhaSave = p.get();
+        if (t.isPresent()) {
+            var trilhaSave = t.get();
             trilhaSave.setTrilhaNome(trilha.getTrilhaNome());
             trilhaSave.setDiretoria(trilha.getDiretoria());
             trilhaRepository.save(trilhaSave);
         } else {
-            throw new Exception("Trilha Não encontrada");
+            throw new Exception("Trilha não encontrada");
         }
     }
 
     @GetMapping("/filter")
     public List<TrilhaRs> findPersonByName(@RequestParam("name") String name) {
-        return this.trilhaRepository.findByNomeContains(name)
+        return this.trilhaRepository.findByTrilhaNomeContains(name)
                 .stream()
                 .map(TrilhaRs::converter)
                 .collect(Collectors.toList());
@@ -71,10 +71,10 @@ public class TrilhaController {
     @GetMapping("/filter/custom")
     public List<TrilhaRs> findPersonByCustom(
             @RequestParam(value = "id", required = false) Long id,
-            @RequestParam(value = "trilha_nome", required = false) String trilha_nome,
+            @RequestParam(value = "trilhaNome", required = false) String trilhaNome,
             @RequestParam(value = "diretoria", required = false) String diretoria
     ) {
-        return this.trilhaCustomRepository.find(id, trilha_nome, diretoria)
+        return this.trilhaCustomRepository.find(id, trilhaNome, diretoria)
                 .stream()
                 .map(TrilhaRs::converter)
                 .collect(Collectors.toList());

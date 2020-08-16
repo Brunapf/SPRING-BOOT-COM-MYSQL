@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface TrilhaRepository extends JpaRepository<Trilha, Long> {
-    List<Trilha> findByNomeContains(String name);
+    List<Trilha> findByTrilhaNomeContains(String name);
 }

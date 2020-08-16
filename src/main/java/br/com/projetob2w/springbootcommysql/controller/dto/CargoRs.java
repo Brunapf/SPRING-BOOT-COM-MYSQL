@@ -6,11 +6,11 @@ import br.com.projetob2w.springbootcommysql.model.Trilha;
 public class CargoRs {
 
     private Long id;
-    private String cargo_nome;
-    private Trilha trilha_id;
+    private String cargoNome;
+    private Trilha trilhaId;
 
     public static CargoRs converter(Cargo c) {
-        var cargo = new CargoRs();
+        CargoRs cargo = new CargoRs();
         cargo.setId(c.getId());
         cargo.setCargoNome(c.getCargoNome());
         cargo.setTrilhaId(c.getTrilhaId());
@@ -26,18 +26,18 @@ public class CargoRs {
     }
 
     public String getCargoNome() {
-        return cargo_nome;
+        return cargoNome;
     }
 
-    public void setCargoNome(String cargo_nome) {
-        this.cargo_nome = cargo_nome;
+    public void setCargoNome(String cargoNome) {
+        this.cargoNome = cargoNome;
     }
 
     public Trilha getTrilhaId() {
-        return trilha_id;
+        return trilhaId;
     }
 
-    public void setTrilhaId(Trilha trilha_id) {
-        this.trilha_id = trilha_id;
+    public void setTrilhaId(Trilha trilhaId) {
+        this.trilhaId = trilhaId;
     }
 }

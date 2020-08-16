@@ -2,15 +2,15 @@ package br.com.projetob2w.springbootcommysql.controller.dto;
 
 public class TrilhaRq {
 
-    private String trilha_nome;
+    private String trilhaNome;
     private String diretoria;
 
     public String getTrilhaNome() {
-        return trilha_nome;
+        return trilhaNome;
     }
 
-    public void setTrilhaNome(String trilha_nome) {
-        this.trilha_nome = trilha_nome;
+    public void setTrilhaNome(String trilhaNome) {
+        this.trilhaNome = trilhaNome;
     }
 
     public String getDiretoria() {
