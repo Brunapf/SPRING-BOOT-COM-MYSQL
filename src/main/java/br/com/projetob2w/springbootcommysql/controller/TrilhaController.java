@@ -60,6 +60,11 @@ public class TrilhaController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteTrilha(@PathVariable("id") Trilha id){
+        trilhaRepository.delete(id);
+    }
+
     @GetMapping("/filter")
     public List<TrilhaRs> findPersonByName(@RequestParam("name") String name) {
         return this.trilhaRepository.findByTrilhaNomeContains(name)

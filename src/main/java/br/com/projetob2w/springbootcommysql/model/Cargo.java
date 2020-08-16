@@ -17,8 +17,8 @@ public class Cargo {
     private String cargoNome;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trilha_id", referencedColumnName = "id")
-    private Trilha trilhaId;
+    @JoinColumn(name = "trilha_id")
+    private Trilha trilha;
 
     @Column(name="cargo_missao")
     private String cargoMissao;
@@ -29,9 +29,9 @@ public class Cargo {
     public Cargo(){
     }
 
-    public Cargo(String cargoNome, Trilha trilhaId) {
+    public Cargo(String cargoNome, Trilha trilha) {
         this.cargoNome = cargoNome;
-        this.trilhaId = trilhaId;
+        this.trilha = trilha;
     }
 
     public Long getId() {
@@ -50,12 +50,12 @@ public class Cargo {
         this.cargoNome = cargoNome;
     }
 
-    public Trilha getTrilhaId() {
-        return trilhaId;
+    public Trilha getTrilha() {
+        return trilha;
     }
 
-    public void setTrilhaId(Trilha trilhaId) {
-        this.trilhaId = trilhaId;
+    public void setTrilha(Trilha trilha) {
+        this.trilha = trilha;
     }
 
     public String getCargoMissao() {

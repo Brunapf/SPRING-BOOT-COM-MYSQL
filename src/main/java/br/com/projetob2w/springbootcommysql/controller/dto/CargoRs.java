@@ -7,13 +7,13 @@ public class CargoRs {
 
     private Long id;
     private String cargoNome;
-    private Trilha trilhaId;
+    private Trilha trilha;
 
     public static CargoRs converter(Cargo c) {
         CargoRs cargo = new CargoRs();
         cargo.setId(c.getId());
         cargo.setCargoNome(c.getCargoNome());
-        cargo.setTrilhaId(c.getTrilhaId());
+        cargo.setTrilha(c.getTrilha());
         return cargo;
     }
 
@@ -33,11 +33,11 @@ public class CargoRs {
         this.cargoNome = cargoNome;
     }
 
-    public Trilha getTrilhaId() {
-        return trilhaId;
+    public Trilha getTrilha() {
+        return trilha;
     }
 
-    public void setTrilhaId(Trilha trilhaId) {
-        this.trilhaId = trilhaId;
+    public void setTrilha(Trilha trilha) {
+        this.trilha = trilha;
     }
 }

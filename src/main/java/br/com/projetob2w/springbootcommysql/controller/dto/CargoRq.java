@@ -5,7 +5,7 @@ import br.com.projetob2w.springbootcommysql.model.Trilha;
 public class CargoRq {
 
     private String cargoNome;
-    private Trilha trilhaId;
+    private Trilha trilha;
 
     public String getCargoNome() {
         return cargoNome;
@@ -15,11 +15,11 @@ public class CargoRq {
         this.cargoNome = cargoNome;
     }
 
-    public Trilha getTrilhaId() {
-        return trilhaId;
+    public Trilha getTrilha() {
+        return trilha;
     }
 
-    public void setTrilhaId(Trilha trilhaId) {
-        this.trilhaId = trilhaId;
+    public void setTrilha(Trilha trilha) {
+        this.trilha = trilha;
     }
 }

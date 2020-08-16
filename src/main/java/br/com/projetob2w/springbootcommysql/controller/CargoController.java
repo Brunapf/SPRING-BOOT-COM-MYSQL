@@ -41,9 +41,9 @@ public class CargoController {
 
     @PostMapping("/")
     public void saveCargo(@RequestBody CargoRq cargo) {
-        Cargo c = new Cargo(cargo.getCargoNome(),cargo.getTrilhaId());
+        Cargo c = new Cargo(cargo.getCargoNome(),cargo.getTrilha());
         c.setCargoNome(cargo.getCargoNome());
-        c.setTrilhaId(cargo.getTrilhaId());
+        c.setTrilha(cargo.getTrilha());
         cargoRepository.save(c);
     }
 
@@ -54,11 +54,16 @@ public class CargoController {
         if (c.isPresent()) {
             var cargoSave = c.get();
             cargoSave.setCargoNome(cargo.getCargoNome());
-            cargoSave.setTrilhaId(cargo.getTrilhaId());
+            cargoSave.setTrilha(cargo.getTrilha());
             cargoRepository.save(cargoSave);
         } else {
             throw new Exception("Cargo não encontrado");
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCargo(@PathVariable("id") Cargo id){
+        cargoRepository.delete(id);
     }
 
     @GetMapping("/filter")

@@ -1,6 +1,7 @@
 package br.com.projetob2w.springbootcommysql.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.*;
 
