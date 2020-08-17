@@ -2,6 +2,7 @@ package br.com.projetob2w.springbootcommysql.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ public class Trilha {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long id;
+    private Integer id;
 
     @Column(name="trilha_nome")
     private String trilhaNome;
@@ -32,16 +33,28 @@ public class Trilha {
     public Trilha() {
     }
 
-    public Trilha(String trilhaNome, String diretoria) {
+    public Trilha(Integer id, String trilhaNome, String diretoria, String missaoFormal, String missaoAlternativa, Timestamp dataAtualizacao) {
+        this.id = id;
         this.trilhaNome = trilhaNome;
         this.diretoria = diretoria;
+        this.missaoFormal = missaoFormal;
+        this.missaoAlternativa = missaoAlternativa;
+        this.dataAtualizacao = dataAtualizacao;
     }
 
-    public Long getId() {
+    public Trilha(String trilhaNome, String diretoria, String missaoFormal, String missaoAlternativa, Timestamp dataAtualizacao) {
+        this.trilhaNome = trilhaNome;
+        this.diretoria = diretoria;
+        this.missaoFormal = missaoFormal;
+        this.missaoAlternativa = missaoAlternativa;
+        this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -83,5 +96,23 @@ public class Trilha {
 
     public void setDataAtualizacao(Timestamp dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Trilha trilha = (Trilha) o;
+        return Objects.equals(id, trilha.id) &&
+                Objects.equals(trilhaNome, trilha.trilhaNome) &&
+                Objects.equals(diretoria, trilha.diretoria) &&
+                Objects.equals(missaoFormal, trilha.missaoFormal) &&
+                Objects.equals(missaoAlternativa, trilha.missaoAlternativa) &&
+                Objects.equals(dataAtualizacao, trilha.dataAtualizacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, trilhaNome, diretoria, missaoFormal, missaoAlternativa, dataAtualizacao);
     }
 }

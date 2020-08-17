@@ -10,6 +10,6 @@ import javax.persistence.NamedNativeQuery;
 import java.util.List;
 
 @Repository
-public interface CargoRepository extends JpaRepository<Cargo, Long> {
+public interface CargoRepository extends JpaRepository<Cargo, Integer> {
     List<Cargo> findByCargoNomeContains(String name);
 }

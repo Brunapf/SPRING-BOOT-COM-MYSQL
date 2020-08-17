@@ -10,6 +10,6 @@ import javax.persistence.NamedNativeQuery;
 import java.util.List;
 
 @Repository
-public interface TrilhaRepository extends JpaRepository<Trilha, Long> {
+public interface TrilhaRepository extends JpaRepository<Trilha, Integer> {
     List<Trilha> findByTrilhaNomeContains(String name);
 }

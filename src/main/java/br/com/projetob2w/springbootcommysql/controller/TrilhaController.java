@@ -33,40 +33,54 @@ public class TrilhaController {
     }
 
     @GetMapping("/{id}")
-    public TrilhaRs findById(@PathVariable("id") Long id) {
-        Trilha trilha = trilhaRepository.getOne(id);
+    public TrilhaRs findById(@PathVariable("id") Integer id) {
+        var trilha = trilhaRepository.getOne(id);
         return TrilhaRs.converter(trilha);
     }
 
     @PostMapping("/")
-    public void saveTrilha(@RequestBody TrilhaRq trilha) {
-        Trilha t = new Trilha(trilha.getTrilhaNome(),trilha.getDiretoria());
-        t.setTrilhaNome(trilha.getTrilhaNome());
-        t.setDiretoria(trilha.getDiretoria());
-        trilhaRepository.save(t);
+    public void saveTrilha(@RequestBody TrilhaRq trilhaRq) {
+        var trilhaSave = new Trilha();
+        trilhaSave.setTrilhaNome(trilhaRq.getTrilhaNome());
+        trilhaSave.setDiretoria(trilhaRq.getDiretoria());
+        trilhaSave.setMissaoFormal(trilhaRq.getMissaoFormal());
+        trilhaSave.setMissaoAlternativa(trilhaRq.getMissaoAlternativa());
+        trilhaSave.setDataAtualizacao(trilhaRq.getDataAtualizacao());
+        trilhaRepository.save(trilhaSave);
     }
 
     @PutMapping("/{id}")
-    public void updateTrilha(@PathVariable("id") Long id, @RequestBody TrilhaRq trilha) throws Exception {
-        var t = trilhaRepository.findById(id);
+    public void updateTrilha(@PathVariable("id") Integer id, @RequestBody TrilhaRq trilha) throws Exception {
+        var p = trilhaRepository.findById(id);
 
-        if (t.isPresent()) {
-            var trilhaSave = t.get();
+        if (p.isPresent()) {
+            var trilhaSave = p.get();
             trilhaSave.setTrilhaNome(trilha.getTrilhaNome());
             trilhaSave.setDiretoria(trilha.getDiretoria());
+            trilhaSave.setDataAtualizacao(trilha.getDataAtualizacao());
+            trilhaSave.setMissaoAlternativa(trilha.getMissaoAlternativa());
+            trilhaSave.setMissaoFormal(trilha.getMissaoFormal());
             trilhaRepository.save(trilhaSave);
         } else {
-            throw new Exception("Trilha não encontrada");
+            throw new Exception("Trilha Não encontrada");
         }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTrilha(@PathVariable("id") Trilha id){
-        trilhaRepository.delete(id);
+    public void deleteTrilha(@PathVariable("id") Integer id,@RequestBody TrilhaRq trilha) throws Exception {
+        var t = trilhaRepository.findById(id);
+
+        if (t.isPresent()) {
+            var trilhadelete = t.get();
+            trilhaRepository.delete(trilhadelete);
+        } else {
+            throw new Exception("Trilha não encontrada");
+        }
+
     }
 
     @GetMapping("/filter")
-    public List<TrilhaRs> findPersonByName(@RequestParam("name") String name) {
+    public List<TrilhaRs> findTrilhaByName(@RequestParam("name") String name) {
         return this.trilhaRepository.findByTrilhaNomeContains(name)
                 .stream()
                 .map(TrilhaRs::converter)
@@ -74,9 +88,9 @@ public class TrilhaController {
     }
 
     @GetMapping("/filter/custom")
-    public List<TrilhaRs> findPersonByCustom(
-            @RequestParam(value = "id", required = false) Long id,
-            @RequestParam(value = "trilhaNome", required = false) String trilhaNome,
+    public List<TrilhaRs> findTrilhaByCustom(
+            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam(value = "trilha_nome", required = false) String trilhaNome,
             @RequestParam(value = "diretoria", required = false) String diretoria
     ) {
         return this.trilhaCustomRepository.find(id, trilhaNome, diretoria)

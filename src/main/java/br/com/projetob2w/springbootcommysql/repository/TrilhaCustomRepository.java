@@ -16,9 +16,9 @@ public class TrilhaCustomRepository {
         this.em = em;
     }
 
-    public List<Trilha> find(Long id, String trilha_nome, String diretoria) {
+    public List<Trilha> find(Integer id, String trilha_nome, String diretoria) {
 
-        String query = "select P from trilha as P ";
+        String query = "select P from Trilha as P ";
         String condicao = "where";
 
         if(id != null) {

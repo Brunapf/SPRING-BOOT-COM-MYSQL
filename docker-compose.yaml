@@ -4,7 +4,7 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    image: spring_boo_com_mysql/api
+    image: spring_boot_com_mysql/api
     ports:
       - '8080:8080'
       - '5005:5005'
@@ -21,7 +21,7 @@ services:
       - MYSQL_ROOT_HOST=%
       - MYSQL_DATABASE=spring_boot_mysql
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=588216
+      - MYSQL_PASSWORD=
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - ./docker/volume_mysql:/var/lib/mysql

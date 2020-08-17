@@ -17,9 +17,9 @@ public class CargoCustomRepository {
         this.em = em;
     }
 
-    public List<Cargo> find(Long id, String cargo_nome, Trilha trilha_id) {
+    public List<Cargo> find(Integer id, String cargo_nome, Trilha trilha_id) {
 
-        String query = "select P from cargo as P ";
+        String query = "select P from Cargo as P ";
         String condicao = "where";
 
         if(id != null) {
